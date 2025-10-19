@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Sharma | IoT Developer & Embedded Systems Enthusiast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --secondary: #7700ff;
+            --accent: #ff00c8;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --light: #e0f8ff;
+            --card-bg: rgba(10, 15, 35, 0.7);
+            --text-color: #e0f8ff;
+            --bg-color: #050510;
+        }
+
+        [data-theme="light"] {
+            --primary: #0066cc;
+            --secondary: #6633cc;
+            --accent: #cc0066;
+            --dark: #f0f0f0;
+            --darker: #e0e0e0;
+            --light: #333333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #333333;
+            --bg-color: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(119, 0, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 200, 0.05) 0%, transparent 50%);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            background: rgba(5, 5, 16, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        [data-theme="light"] header {
+            background: rgba(240, 240, 240, 0.9);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: rgba(5, 5, 16, 0.95);
+        }
+
+        [data-theme="light"] header.scrolled {
+            background: rgba(240, 240, 240, 0.95);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 247, 255, 0.1);
+        }
+
+        .language-toggle {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle:hover {
+            background: rgba(0, 247, 255, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Exo 2', sans-serif;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--darker);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 247, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .monitor-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .monitor {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, var(--dark), var(--darker));
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 0 1px rgba(0, 247, 255, 0.3),
+                0 0 30px rgba(0, 247, 255, 0.2),
+                inset 0 0 20px rgba(0, 247, 255, 0.1);
+            transform-style: preserve-3d;
+            transform: rotateY(-5deg) rotateX(5deg);
+        }
+
+        .monitor::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(0, 247, 255, 0.5);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .monitor-screen {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #000;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #introVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        .video-controls button {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .monitor-stand {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 40px;
+            background: linear-gradient(to top, var(--dark), var(--darker));
+            border-radius: 0 0 5px 5px;
+        }
+
+        .monitor-stand::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: var(--darker);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(0, 247, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -50px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-card {
+            width: 300px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, var(--dark), var(--darker));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .profile-info p {
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 247, 255, 0.1);
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-3px);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background: rgba(0, 247, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 247, 255, 0.3);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 247, 255, 0.2);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--dark), var(--darker));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 247, 255, 0.1), rgba(119, 0, 255, 0.1));
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(119, 0, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(119, 0, 255, 0.5);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .project-link i {
+            margin-right: 5px;
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        /* Certifications Section */
+        .certifications-container {
+            position: relative;
+        }
+
+        .certifications-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: scale(1.05);
+        }
+
+        .cert-img {
+            height: 180px;
+            background: linear-gradient(45deg, var(--dark), var(--darker));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .cert-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cert-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .cert-info p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 247, 255, 0.2);
+        }
+
+        .blog-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--dark), var(--darker));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .blog-content p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .blog-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .blog-link i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 247, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .contact-form {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(5, 5, 16, 0.9);
+            padding: 50px 0 20px;
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        [data-theme="light"] footer {
+            background: rgba(240, 240, 240, 0.9);
+            border-top: 1px solid rgba(0, 102, 204, 0.2);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--darker);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 247, 255, 0.5);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 50px auto;
+            max-width: 800px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 247, 255, 0.3);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, var(--dark), var(--darker));
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 4rem;
+        }
+
+        .modal-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                margin-bottom: 50px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(5, 5, 16, 0.95);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+            
+            [data-theme="light"] .nav-links {
+                background: rgba(240, 240, 240, 0.95);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .monitor-container {
+                width: 300px;
+                height: 225px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .certifications-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">YASH<span>SHARMA</span></a>
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="language-toggle" id="languageToggle">EN</button>
+                    <div class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                    <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
+                    <!-- <li><a href="#blog" data-i18n="nav.blog">Blog</a></li> -->
+                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>IoT Developer, <span>Full Stack Learner</span> & Embedded Systems Enthusiast</h1>
+                    <p data-i18n="hero.description">Passionate B.Tech Computer Science student specializing in Embedded Systems and IoT technologies. Developing innovative solutions with Raspberry Pi, ESP32, and various sensors.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary" data-i18n="hero.projects">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary" data-i18n="hero.contact">Get In Touch</a>
+                        <a href="cv.html" class="btn btn-secondary" id="downloadResume" data-i18n="hero.resume">Download Resume</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="monitor-container">
+                        <div class="monitor">
+                            <div class="monitor-screen">
+                                <div class="video-container">
+                                    <video id="introVideo" controls>
+                                        <source src="#" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div class="video-controls">
+                                        <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+                                        <button id="muteBtn"><i class="fas fa-volume-up"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="monitor-stand"></div>
+                    </div>
+                    <div class="floating-elements">
+                        <div class="floating-element"></div>
+                        <div class="floating-element"></div>
+                        <div class="floating-element"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="about.title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p data-i18n="about.text1">I am a passionate B.Tech Computer Science student at Invertis University specializing in Embedded Systems and IoT technologies. With experience in developing innovative solutions using Raspberry Pi, ESP32, and various sensors, I have strong problem-solving skills and a track record of successful project implementations.</p>
+                    <p data-i18n="about.text2">My expertise includes Python, C/C++, and web technologies, combined with hands-on experience in hardware platforms and IoT components. I'm continuously learning and exploring new technologies to create efficient, scalable IoT solutions.</p>
+                    <p data-i18n="about.text3">I have successfully completed 10+ IoT and embedded systems projects and participated in multiple hackathons, securing a position in the Top 10 in the Internal Hackathon for Smart India Hackathon 2025.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/yash-sharma-126b3b2a0" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/yashsharma0525" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="mailto:yashtech0525@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+919219220759"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="profile-card">
+                        <div class="profile-img">
+                            <!-- Replace with actual photo -->
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Yash Sharma</h3>
+                            <p data-i18n="about.role">IoT Developer & Embedded Systems Enthusiast</p>
+                            <p data-i18n="about.location">Shahjahanpur, Uttar Pradesh, India</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/yash-sharma-126b3b2a0" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://github.com/yashsharma0525" target="_blank"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="skills.title">Technical Skills</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> <span data-i18n="skills.category1">Programming & Web</span></h3>
+                    <div class="skill-items">
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">HTML5</div>
+                        <div class="skill-item">CSS</div>
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">C/C++</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-microchip"></i> <span data-i18n="skills.category2">Hardware & IoT Platforms</span></h3>
+                    <div class="skill-items">
+                        <div class="skill-item">Raspberry Pi</div>
+                        <div class="skill-item">ESP32</div>
+                        <div class="skill-item">Arduino</div>
+                        <div class="skill-item">SIM800L</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-sensor"></i> <span data-i18n="skills.category3">Sensors & Components</span></h3>
+                    <div class="skill-items">
+                        <div class="skill-item">DHT11</div>
+                        <div class="skill-item">SGP30</div>
+                        <div class="skill-item">OLED Display</div>
+                        <div class="skill-item">RFID</div>
+                        <div class="skill-item">GPS Module</div>
+                        <div class="skill-item">FSR Sensor</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> <span data-i18n="skills.category4">Tools & Technologies</span></h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Microsoft Office</span>
+                        <span class="skill-item">Arduino IDE</span>
+                        <span class="skill-item">Github</span>
+                        <span class="skill-item">VS Code</span>
+                        <span class="skill-item">Thingsboard</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="projects.title">Key Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-project="1">
+                    <div class="project-img">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-i18n="projects.project1.title">Smart IVR System</h3>
+                        <p data-i18n="projects.project1.description">Developed a fully functional IVR system with auto call pickup, DTMF-based menu navigation, pre-recorded audio playback, and real-time analytics using Raspberry Pi 5 + SIM800L.</p>
+                        <div class="project-tech">
+                            <div class="tech-tag">Raspberry Pi</div>
+                            <div class="tech-tag">SIM800L</div>
+                            <div class="tech-tag">Python</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" data-i18n="projects.viewDetails">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card" data-project="2">
+                    <div class="project-img">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-i18n="projects.project2.title">Smart Transit</h3>
+                        <p data-i18n="projects.project2.description">Created a real-time public transport tracking system for small cities using IoT sensors to show live bus tracking and seat availability.</p>
+                        <div class="project-tech">
+                            <div class="tech-tag">IoT</div>
+                            <div class="tech-tag">GPS</div>
+                            <div class="tech-tag">Web Dashboard</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" data-i18n="projects.viewDetails">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card" data-project="3">
+                    <div class="project-img">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-i18n="projects.project3.title">Air Quality Monitoring</h3>
+                        <p data-i18n="projects.project3.description">Built an IoT-based sensor air quality monitoring system with real-time dashboard integration using DHT11 and SGP30 sensors.</p>
+                        <div class="project-tech">
+                            <div class="tech-tag">ESP32</div>
+                            <div class="tech-tag">DHT11</div>
+                            <div class="tech-tag">SGP30</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" data-i18n="projects.viewDetails">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="project-card" data-project="4">
+                    <div class="project-img">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-i18n="projects.project4.title">Automated School Bell</h3>
+                        <p data-i18n="projects.project4.description">Developed an automated bell system for educational institutions with programmable schedules using Raspberry Pi.</p>
+                        <div class="project-tech">
+                            <div class="tech-tag">Raspberry Pi</div>
+                            <div class="tech-tag">Python</div>
+                            <div class="tech-tag">Scheduling</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" data-i18n="projects.viewDetails">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="certifications.title">Certifications</h2>
+            </div>
+            <div class="certifications-container">
+                <div class="certifications-gallery">
+                    <!-- Certificates from your CV -->
+                    <div class="cert-card">
+                        <div class="cert-img">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Hackbhoomi - Internal SIH 2025</h3>
+                            <p>Invertis University</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-img">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Certificate of Appreciation</h3>
+                            <p>IoT Project - Invertis University</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-img">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Data Analytics</h3>
+                            <p>Deloitte Australia - Forage</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-img">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Software Engineering</h3>
+                            <p>Accenture Nordics - Forage</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-img">
+                            <i class="fas fa-satellite"></i>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Remote Sensing Data Analytics</h3>
+                            <p>ISRO - Indian Institute of Remote Sensing</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-img">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Course on Computer Concepts (CCC)</h3>
+                            <p>NIELIT (2023)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" style = "display: none;">
+        <div class="container">
+            <div class="section-title" >
+                <h2 data-i18n="blog.title">Latest Blog Posts</h2>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3 data-i18n="blog.post1.title">Getting Started with ESP32</h3>
+                        <div class="blog-meta">
+                            <span data-i18n="blog.post1.date">May 15, 2024</span>
+                            <span data-i18n="blog.post1.category">IoT</span>
+                        </div>
+                        <p data-i18n="blog.post1.excerpt">Learn how to set up your first ESP32 project and connect it to various sensors for IoT applications.</p>
+                        <a href="#" class="blog-link" data-i18n="blog.readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3 data-i18n="blog.post2.title">Building a Smart Home System</h3>
+                        <div class="blog-meta">
+                            <span data-i18n="blog.post2.date">April 22, 2024</span>
+                            <span data-i18n="blog.post2.category">Home Automation</span>
+                        </div>
+                        <p data-i18n="blog.post2.excerpt">A step-by-step guide to creating an affordable smart home system using Raspberry Pi and IoT protocols.</p>
+                        <a href="#" class="blog-link" data-i18n="blog.readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3 data-i18n="blog.post3.title">IoT Data Visualization</h3>
+                        <div class="blog-meta">
+                            <span data-i18n="blog.post3.date">March 10, 2024</span>
+                            <span data-i18n="blog.post3.category">Data Analytics</span>
+                        </div>
+                        <p data-i18n="blog.post3.excerpt">How to create interactive dashboards for visualizing data from your IoT devices in real-time.</p>
+                        <a href="#" class="blog-link" data-i18n="blog.readMore">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="contact.title">Get In Touch</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-i18n="contact.location">Location</h3>
+                            <p data-i18n="contact.address">Shahjahanpur, Uttar Pradesh, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-i18n="contact.email">Email</h3>
+                            <p>yashtech0525@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-i18n="contact.phone">Phone</h3>
+                            <p>+91 9219220759</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-i18n="contact.social">Social Profiles</h3>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/yash-sharma-126b3b2a0" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://github.com/yashsharma0525" target="_blank"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" data-i18n="contact.form.name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-i18n="contact.form.email">Your Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" data-i18n="contact.form.subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-i18n="contact.form.message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-i18n="contact.form.send">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+            <div class="copyright">
+                <p>© 2025 Yash Sharma. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Project Modals -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Project Title</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <p id="modalDescription">Project description will appear here.</p>
+                <div class="modal-tech" id="modalTech">
+                    <!-- Technology tags will be inserted here -->
+                </div>
+                <div class="modal-links" id="modalLinks">
+                    <!-- Project links will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.skills": "Skills",
+                "nav.projects": "Projects",
+                "nav.certifications": "Certifications",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                "hero.title": "IoT Developer, Full Stack Learner & Embedded Systems Enthusiast",
+                "hero.description": "Passionate B.Tech Computer Science student specializing in Embedded Systems and IoT technologies. Developing innovative solutions with Raspberry Pi, ESP32, and various sensors.",
+                "hero.projects": "View Projects",
+                "hero.contact": "Get In Touch",
+                "hero.resume": "Download Resume",
+                "about.title": "About Me",
+                "about.text1": "I am a passionate B.Tech Computer Science student at Invertis University specializing in Embedded Systems and IoT technologies. With experience in developing innovative solutions using Raspberry Pi, ESP32, and various sensors, I have strong problem-solving skills and a track record of successful project implementations.",
+                "about.text2": "My expertise includes Python, C/C++, and web technologies, combined with hands-on experience in hardware platforms and IoT components. I'm continuously learning and exploring new technologies to create efficient, scalable IoT solutions.",
+                "about.text3": "I have successfully completed 10+ IoT and embedded systems projects and participated in multiple hackathons, securing a position in the Top 10 in the Internal Hackathon for Smart India Hackathon 2025.",
+                "about.role": "IoT Developer & Embedded Systems Enthusiast",
+                "about.location": "Shahjahanpur, Uttar Pradesh, India",
+                "skills.title": "Technical Skills",
+                "skills.category1": "Programming & Web",
+                "skills.category2": "Hardware & IoT Platforms",
+                "skills.category3": "Sensors & Components",
+                "skills.category4": "Tools & Technologies",
+                "projects.title": "Key Projects",
+                "projects.project1.title": "Smart IVR System",
+                "projects.project1.description": "Developed a fully functional IVR system with auto call pickup, DTMF-based menu navigation, pre-recorded audio playback, and real-time analytics using Raspberry Pi 5 + SIM800L.",
+                "projects.project2.title": "Smart Transit",
+                "projects.project2.description": "Created a real-time public transport tracking system for small cities using IoT sensors to show live bus tracking and seat availability.",
+                "projects.project3.title": "Air Quality Monitoring",
+                "projects.project3.description": "Built an IoT-based sensor air quality monitoring system with real-time dashboard integration using DHT11 and SGP30 sensors.",
+                "projects.project4.title": "Automated School Bell",
+                "projects.project4.description": "Developed an automated bell system for educational institutions with programmable schedules using Raspberry Pi.",
+                "projects.viewDetails": "View Details",
+                "certifications.title": "Certifications",
+                "blog.title": "Latest Blog Posts",
+                "blog.post1.title": "Getting Started with ESP32",
+                "blog.post1.date": "May 15, 2024",
+                "blog.post1.category": "IoT",
+                "blog.post1.excerpt": "Learn how to set up your first ESP32 project and connect it to various sensors for IoT applications.",
+                "blog.post2.title": "Building a Smart Home System",
+                "blog.post2.date": "April 22, 2024",
+                "blog.post2.category": "Home Automation",
+                "blog.post2.excerpt": "A step-by-step guide to creating an affordable smart home system using Raspberry Pi and IoT protocols.",
+                "blog.post3.title": "IoT Data Visualization",
+                "blog.post3.date": "March 10, 2024",
+                "blog.post3.category": "Data Analytics",
+                "blog.post3.excerpt": "How to create interactive dashboards for visualizing data from your IoT devices in real-time.",
+                "blog.readMore": "Read More",
+                "contact.title": "Get In Touch",
+                "contact.location": "Location",
+                "contact.address": "Shahjahanpur, Uttar Pradesh, India",
+                "contact.email": "Email",
+                "contact.phone": "Phone",
+                "contact.social": "Social Profiles",
+                "contact.form.name": "Your Name",
+                "contact.form.email": "Your Email",
+                "contact.form.subject": "Subject",
+                "contact.form.message": "Message",
+                "contact.form.send": "Send Message",
+                "footer.rights": "All Rights Reserved."
+            },
+            hi: {
+                "nav.home": "होम",
+                "nav.about": "परिचय",
+                "nav.skills": "कौशल",
+                "nav.projects": "प्रोजेक्ट्स",
+                "nav.certifications": "प्रमाणपत्र",
+                "nav.blog": "ब्लॉग",
+                "nav.contact": "संपर्क",
+                "hero.title": "आईओटी डेवलपर, फुल स्टैक लर्नर और एम्बेडेड सिस्टम उत्साही",
+                "hero.description": "एम्बेडेड सिस्टम और आईओटी तकनीकों में विशेषज्ञता वाला कंप्यूटर साइंस का उत्साही बी.टेक छात्र। रास्पबेरी पाई, ESP32 और विभिन्न सेंसर का उपयोग करके नवीन समाधान विकसित कर रहा हूं।",
+                "hero.projects": "प्रोजेक्ट्स देखें",
+                "hero.contact": "संपर्क करें",
+                "hero.resume": "रिज्यूम डाउनलोड करें",
+                "about.title": "मेरे बारे में",
+                "about.text1": "मैं इनवर्टिस यूनिवर्सिटी में कंप्यूटर साइंस का एक उत्साही बी.टेक छात्र हूं, जो एम्बेडेड सिस्टम और आईओटी तकनीकों में विशेषज्ञता रखता हूं। रास्पबेरी पाई, ESP32 और विभिन्न सेंसर का उपयोग करके नवीन समाधान विकसित करने के अनुभव के साथ, मेरे पास मजबूत समस्या-समाधान कौशल और सफल परियोजना कार्यान्वयन का ट्रैक रिकॉर्ड है।",
+                "about.text2": "मेरी विशेषज्ञता में पायथन, C/C++, और वेब तकनीकें शामिल हैं, जो हार्डवेयर प्लेटफॉर्म और आईओटी घटकों में हाथों-हाथ अनुभव के साथ संयुक्त हैं। मैं लगातार कुशल, स्केलेबल आईओटी समाधान बनाने के लिए नई तकनीकों को सीख और खोज रहा हूं।",
+                "about.text3": "मैंने सफलतापूर्वक 10+ आईओटी और एम्बेडेड सिस्टम परियोजनाएं पूरी की हैं और कई हैकाथॉन में भाग लिया है, स्मार्ट इंडिया हैकाथॉन 2025 के लिए आंतरिक हैकाथॉन में शीर्ष 10 में स्थान हासिल किया है।",
+                "about.role": "आईओटी डेवलपर और एम्बेडेड सिस्टम उत्साही",
+                "about.location": "शाहजहांपुर, उत्तर प्रदेश, भारत",
+                "skills.title": "तकनीकी कौशल",
+                "skills.category1": "प्रोग्रामिंग और वेब",
+                "skills.category2": "हार्डवेयर और आईओटी प्लेटफॉर्म",
+                "skills.category3": "सेंसर और घटक",
+                "skills.category4": "टूल्स और तकनीकें",
+                "projects.title": "मुख्य प्रोजेक्ट्स",
+                "projects.project1.title": "स्मार्ट IVR सिस्टम",
+                "projects.project1.description": "रास्पबेरी पाई 5 + SIM800L का उपयोग करके ऑटो कॉल पिकअप, DTMF-आधारित मेन्यू नेविगेशन, पहले से रिकॉर्ड किए गए ऑडियो प्लेबैक और रीयल-टाइम एनालिटिक्स के साथ एक पूरी तरह कार्यात्मक IVR सिस्टम विकसित किया।",
+                "projects.project2.title": "स्मार्ट ट्रांजिट",
+                "projects.project2.description": "छोटे शहरों के लिए लाइव बस ट्रैकिंग और सीट उपलब्धता दिखाने के लिए आईओटी सेंसर का उपयोग करके एक रीयल-टाइम पब्लिक ट्रांसपोर्ट ट्रैकिंग सिस्टम बनाया।",
+                "projects.project3.title": "एयर क्वालिटी मॉनिटरिंग",
+                "projects.project3.description": "DHT11 और SGP30 सेंसर का उपयोग करके रीयल-टाइम डैशबोर्ड एकीकरण के साथ एक आईओटी-आधारित सेंसर एयर क्वालिटी मॉनिटरिंग सिस्टम बनाया।",
+                "projects.project4.title": "ऑटोमेटेड स्कूल बेल",
+                "projects.project4.description": "रास्पबेरी पाई का उपयोग करके प्रोग्राम करने योग्य शेड्यूल के साथ शैक्षणिक संस्थानों के लिए एक स्वचालित बेल सिस्टम विकसित किया।",
+                "projects.viewDetails": "विवरण देखें",
+                "certifications.title": "प्रमाणपत्र",
+                "blog.title": "नवीनतम ब्लॉग पोस्ट",
+                "blog.post1.title": "ESP32 के साथ शुरुआत करना",
+                "blog.post1.date": "15 मई, 2024",
+                "blog.post1.category": "आईओटी",
+                "blog.post1.excerpt": "सीखें कि कैसे अपना पहला ESP32 प्रोजेक्ट सेट अप करें और इसे आईओटी एप्लिकेशन के लिए विभिन्न सेंसर से कनेक्ट करें।",
+                "blog.post2.title": "स्मार्ट होम सिस्टम बनाना",
+                "blog.post2.date": "22 अप्रैल, 2024",
+                "blog.post2.category": "होम ऑटोमेशन",
+                "blog.post2.excerpt": "रास्पबेरी पाई और आईओटी प्रोटोकॉल का उपयोग करके एक किफायती स्मार्ट होम सिस्टम बनाने के लिए चरण-दर-चरण मार्गदर्शिका।",
+                "blog.post3.title": "आईओटी डेटा विज़ुअलाइज़ेशन",
+                "blog.post3.date": "10 मार्च, 2024",
+                "blog.post3.category": "डेटा एनालिटिक्स",
+                "blog.post3.excerpt": "अपने आईओटी डिवाइस से डेटा को रीयल-टाइम में विज़ुअलाइज़ करने के लिए इंटरैक्टिव डैशबोर्ड कैसे बनाएं।",
+                "blog.readMore": "और पढ़ें",
+                "contact.title": "संपर्क करें",
+                "contact.location": "स्थान",
+                "contact.address": "शाहजहांपुर, उत्तर प्रदेश, भारत",
+                "contact.email": "ईमेल",
+                "contact.phone": "फोन",
+                "contact.social": "सोशल प्रोफाइल",
+                "contact.form.name": "आपका नाम",
+                "contact.form.email": "आपका ईमेल",
+                "contact.form.subject": "विषय",
+                "contact.form.message": "संदेश",
+                "contact.form.send": "संदेश भेजें",
+                "footer.rights": "सर्वाधिकार सुरक्षित।"
+            }
+        };
+
+        // Project data for modals
+        const projects = {
+            1: {
+                title: "Smart IVR System",
+                description: "Developed a fully functional IVR system with auto call pickup, DTMF-based menu navigation, pre-recorded audio playback, and real-time analytics using Raspberry Pi 5 + SIM800L. The system can handle multiple calls simultaneously and provides detailed call analytics through a web dashboard.",
+                tech: ["Raspberry Pi", "SIM800L", "Python", "Flask", "MySQL"],
+                links: [
+                    { text: "View Code", url: "#", icon: "fab fa-github" },
+                    { text: "Live Demo", url: "#", icon: "fas fa-external-link-alt" }
+                ]
+            },
+            2: {
+                title: "Smart Transit",
+                description: "Created a real-time public transport tracking system for small cities using IoT sensors to show live bus tracking and seat availability. The system uses GPS modules and ultrasonic sensors to track vehicle location and passenger count, with data displayed on a mobile-friendly web application.",
+                tech: ["ESP32", "GPS Module", "Ultrasonic Sensors", "React", "Node.js"],
+                links: [
+                    { text: "View Code", url: "#", icon: "fab fa-github" },
+                    { text: "Live Demo", url: "#", icon: "fas fa-external-link-alt" }
+                ]
+            },
+            3: {
+                title: "Air Quality Monitoring",
+                description: "Built an IoT-based sensor air quality monitoring system with real-time dashboard integration using DHT11 and SGP30 sensors. The system measures temperature, humidity, CO2 levels, and TVOC concentrations, sending alerts when air quality parameters exceed safe limits.",
+                tech: ["ESP32", "DHT11", "SGP30", "MQTT", "Chart.js"],
+                links: [
+                    { text: "View Code", url: "#", icon: "fab fa-github" }
+                ]
+            },
+            4: {
+                title: "Automated School Bell",
+                description: "Developed an automated bell system for educational institutions with programmable schedules using Raspberry Pi. The system allows administrators to set custom bell schedules for different days of the week and automatically adjusts for holidays and special events.",
+                tech: ["Raspberry Pi", "Python", "Flask", "SQLite", "Cron"],
+                links: [
+                    { text: "View Code", url: "#", icon: "fab fa-github" }
+                ]
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'en';
+
+        // DOM elements
+        const themeToggle = document.getElementById('themeToggle');
+        const languageToggle = document.getElementById('languageToggle');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const header = document.getElementById('header');
+        const backToTop = document.getElementById('backToTop');
+        const contactForm = document.getElementById('contactForm');
+        const introVideo = document.getElementById('introVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const downloadResume = document.getElementById('downloadResume');
+        const projectModal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalTech = document.getElementById('modalTech');
+        const modalLinks = document.getElementById('modalLinks');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Mobile Menu Toggle
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to top button
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert(currentLanguage === 'en' ? 'Thank you for your message! I will get back to you soon.' : 'आपके संदेश के लिए धन्यवाद! मैं जल्द ही आपसे संपर्क करूंगा।');
+            contactForm.reset();
+        });
+
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // Language toggle
+        languageToggle.addEventListener('click', () => {
+            currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
+            languageToggle.textContent = currentLanguage === 'en' ? 'EN' : 'HI';
+            updateContent();
+        });
+
+        // Update content based on language
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // Video controls
+        playPauseBtn.addEventListener('click', () => {
+            if (introVideo.paused) {
+                introVideo.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                introVideo.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+        muteBtn.addEventListener('click', () => {
+            introVideo.muted = !introVideo.muted;
+            muteBtn.innerHTML = introVideo.muted ? 
+                '<i class="fas fa-volume-mute"></i>' : 
+                '<i class="fas fa-volume-up"></i>';
+        });
+
+        // Download resume
+        // Download resume functionality
+            document.getElementById('downloadResume').addEventListener('click', function (e) {
+                // Optional: Download tracking ke liye
+                console.log('Resume download started');
+
+                // Optional: Alert show karna hai toh
+                if (currentLanguage === 'en') {
+                    alert('Your resume download will start shortly...');
+                } else {
+                    alert('आपका रिज्यूम डाउनलोड शुरू होगा...');
+                }
+            });
+
+        // Project modals
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.getAttribute('data-project');
+                const project = projects[projectId];
+                
+                modalTitle.textContent = project.title;
+                modalDescription.textContent = project.description;
+                
+                // Clear previous tech tags
+                modalTech.innerHTML = '';
+                project.tech.forEach(tech => {
+                    const tag = document.createElement('div');
+                    tag.className = 'tech-tag';
+                    tag.textContent = tech;
+                    modalTech.appendChild(tag);
+                });
+                
+                // Clear previous links
+                modalLinks.innerHTML = '';
+                project.links.forEach(link => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.className = 'project-link';
+                    a.innerHTML = `<i class="${link.icon}"></i> ${link.text}`;
+                    modalLinks.appendChild(a);
+                });
+                
+                // Show modal
+                projectModal.style.display = 'block';
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            projectModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.style.display = 'none';
+            }
+        });
+
+        // Initialize
+        updateContent();
+    </script>
+</body>
+</html>

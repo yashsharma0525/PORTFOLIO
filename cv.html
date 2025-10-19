@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Sharma - Resume | IoT Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4A40E5;
+            --text-color: #2D2B55;
+            --light-text: #666;
+            --bg-color: #FFFFFF;
+            --section-bg: #F8F9FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 0;
+            margin: 0;
+        }
+
+        .resume-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: var(--light-text);
+        }
+
+        .experience-item, .education-item, .project-item, .certification-item {
+            margin-bottom: 25px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .item-subtitle {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .item-date {
+            color: var(--light-text);
+            font-style: italic;
+        }
+
+        .item-description {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .skill {
+            background: var(--section-bg);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .resume-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .resume-container {
+                padding: 20px;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .download-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:window.print()" class="download-btn no-print">
+        <i class="fas fa-download"></i> Download PDF
+    </a>
+
+    <div class="resume-container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1 class="name">Yash Sharma</h1>
+            <div class="title">IoT Developer & Embedded Systems Enthusiast</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>yashtech0525@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 9219220759</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Shahjahanpur, Uttar Pradesh, India</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/yash-sharma-126b3b2a0/" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/yashsharma0525" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="summary">
+                Passionate B.Tech Computer Science student at Invertis University specializing in Embedded Systems and IoT technologies. 
+                Experienced in developing innovative solutions using Raspberry Pi, ESP32, and various sensors. Strong problem-solving 
+                skills with a track record of successful project implementations and hackathon participations. Continuously learning 
+                and exploring new technologies to create efficient, scalable IoT solutions.
+            </p>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="education-item">
+                <div class="item-header">
+                    <div class="item-title">Bachelor of Technology - Computer Science</div>
+                    <div class="item-date">2024 - 2028</div>
+                </div>
+                <div class="item-subtitle">Invertis University, Bareilly</div>
+                <div class="item-description">
+                    Specializing in Embedded Systems and IoT Technologies
+                </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="item-header">
+                    <div class="item-title">Intermediate</div>
+                    <div class="item-date">2023 - 2024</div>
+                </div>
+                <div class="item-subtitle">Sri. Putto Singh Chandra Kumari I.C. Surujupur Shahjahanpur</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="item-header">
+                    <div class="item-title">Course on Computer Concepts (CCC)</div>
+                    <div class="item-date">2023</div>
+                </div>
+                <div class="item-subtitle">National Institute of Electronics & Information Technology (NIELIT)</div>
+                <div class="item-description">
+                    Grade: C
+                </div>
+            </div>
+        </div>
+
+        <div class="two-column">
+            <!-- Skills Section -->
+            <div class="section">
+                <h2 class="section-title">Technical Skills</h2>
+                
+                <h3 class="item-subtitle">Programming & Web</h3>
+                <div class="skills-container">
+                    <span class="skill">Python</span>
+                    <span class="skill">HTML5</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">C/C++</span>
+                </div>
+                
+                <h3 class="item-subtitle">Hardware & IoT Platforms</h3>
+                <div class="skills-container">
+                    <span class="skill">Raspberry Pi</span>
+                    <span class="skill">ESP32</span>
+                    <span class="skill">Arduino</span>
+                    <span class="skill">SIM800L</span>
+                </div>
+                
+                <h3 class="item-subtitle">Sensors & Components</h3>
+                <div class="skills-container">
+                    <span class="skill">DHT11</span>
+                    <span class="skill">SGP30</span>
+                    <span class="skill">OLED Display</span>
+                    <span class="skill">RFID</span>
+                    <span class="skill">GPS Module</span>
+                    <span class="skill">FSR Sensor</span>
+                </div>
+                
+                <h3 class="item-subtitle">Tools & Technologies</h3>
+                <div class="skills-container">
+                    <span class="skill">Microsoft Office</span>
+                    <span class="skill">Arduino IDE</span>
+                    <span class="skill">Github</span>
+                    <span class="skill">VS Code</span>
+                    <span class="skill">Thingsboard</span>
+                </div>
+            </div>
+
+            <!-- Certifications Section -->
+            <div class="section">
+                <h2 class="section-title">Certifications</h2>
+                
+                <div class="certification-item">
+                    <div class="item-header">
+                        <div class="item-title">Hackbhoomi - Internal SIH 2025</div>
+                        <div class="item-date">2025</div>
+                    </div>
+                    <div class="item-subtitle">Invertis University</div>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="item-header">
+                        <div class="item-title">Certificate of Appreciation - IoT Project</div>
+                        <div class="item-date">2025</div>
+                    </div>
+                    <div class="item-subtitle">Invertis University</div>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="item-header">
+                        <div class="item-title">Deloitte Australia - Data Analytics</div>
+                        <div class="item-date">2025</div>
+                    </div>
+                    <div class="item-subtitle">Forage</div>
+                    <div class="item-description">Job Simulation</div>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="item-header">
+                        <div class="item-title">Accenture Nordics - Software Engineering</div>
+                        <div class="item-date">2025</div>
+                    </div>
+                    <div class="item-subtitle">Forage</div>
+                    <div class="item-description">Job Simulation</div>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="item-header">
+                        <div class="item-title">Remote Sensing Data Analytics</div>
+                        <div class="item-date">2025</div>
+                    </div>
+                    <div class="item-subtitle">ISRO - Indian Institute of Remote Sensing</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section">
+            <h2 class="section-title">Key Projects</h2>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <div class="item-title">Smart IVR System using Raspberry Pi 5 + SIM800L</div>
+                    <div class="item-date">2024</div>
+                </div>
+                <div class="item-description">
+                    Developed a fully functional IVR system with auto call pickup, DTMF-based menu navigation, 
+                    pre-recorded audio playback, and real-time analytics. Features include call logging, 
+                    analytics tracking, and real-time manual staff connection via physical button.
+                    <br><strong>Technologies:</strong> Raspberry Pi 5, SIM800L, Python, DTMF, VLC
+                </div>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <div class="item-title">Smart Transit - Public Transport Tracking</div>
+                    <div class="item-date">2025</div>
+                </div>
+                <div class="item-description">
+                    Created a real-time public transport tracking system for small cities using IoT sensors 
+                    (ESP32, GPS module, FSR pressure sensor) to show live bus tracking and seat availability 
+                    with web dashboard. Qualified for Top 10 in Internal Hackathon for Smart India Hackathon 2025.
+                    <br><strong>Technologies:</strong> ESP32, GPS Module, FSR Sensor, IoT, Web Dashboard
+                </div>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <div class="item-title">Smart Indoor Air Quality Monitoring System</div>
+                    <div class="item-date">2024</div>
+                </div>
+                <div class="item-description">
+                    Built an IoT-based sensor air quality monitoring system using sensors with real-time data 
+                    visualization and remote dashboard integration for indoor environments.
+                    <br><strong>Technologies:</strong> SGP30, DHT11, OLED Display, IoT Sensors
+                </div>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <div class="item-title">Automated School Bell System</div>
+                    <div class="item-date">2024</div>
+                </div>
+                <div class="item-description">
+                    Developed an automated bell system for educational institutions with programmable schedules 
+                    and manual override capabilities.
+                    <br><strong>Technologies:</strong> Raspberry Pi, Python, Scheduling Algorithms
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="section">
+            <h2 class="section-title">Achievements</h2>
+            <div class="item-description">
+                <ul>
+                    <li>Secured position in Top 10 in Internal Hackathon for Smart India Hackathon 2025</li>
+                    <li>1,628+ followers on LinkedIn showcasing professional network and influence</li>
+                    <li>Successfully completed 10+ IoT and embedded systems projects</li>
+                    <li>Participated in multiple job simulations with leading companies (Deloitte, Accenture)</li>
+                    <li>Received Certificate of Appreciation from Invertis University for IoT project development</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="section">
+            <h2 class="section-title">Languages</h2>
+            <div class="item-description">
+                • English (Professional Proficiency)<br>
+                • Hindi (Native)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current year in any elements that might need it
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElements = document.querySelectorAll('.current-year');
+            yearElements.forEach(el => {
+                el.textContent = new Date().getFullYear();
+            });
+        });
+    </script>
+</body>
+</html>
